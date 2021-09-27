@@ -85,5 +85,6 @@ public class AnswerData : MonoBehaviour {
         toggle.color = (Checked) ? new Color(255,255,255) : new Color(256, 256, 256);
 
         gameManager.AcceptQuestion();
+        ST_PuzzleDisplay.inQuestion = false;
     }
 }

@@ -18,13 +18,15 @@ public class ST_PuzzleTile : MonoBehaviour
 
 	public static bool flag = false;
 	float timer;
-	int cantidadPregunta;
+	public int cantidadPregunta;
 	// store this tiles array location.
 	public Vector2 ArrayLocation = new Vector2();
 	public Vector2 GridLocation = new Vector2();
 
 	GameObject CanvasP;
 	GameObject CanvasA;
+
+	
 
 	void Awake()
 	{
@@ -100,12 +102,14 @@ public class ST_PuzzleTile : MonoBehaviour
 					CorrectLocationAnswer = true;
 					UIManager.isplaying = true;				
 					Debug.Log(cantidadPregunta + " Preguntas lanzadas");
+					ST_PuzzleDisplay.inQuestion = true;
 				}
 				else if (UIManager.isplaying && !CorrectLocationAnswer)
 				{
 					CorrectLocationAnswer = true;
 					GameObject.FindGameObjectWithTag("Finish").GetComponent<UIManager>().Continuar();		
 					Debug.Log(cantidadPregunta + " Preguntas lanzadas");
+					ST_PuzzleDisplay.inQuestion = true;
 				}
 			}
 		}

@@ -39,6 +39,8 @@ public class ST_PuzzleDisplay : MonoBehaviour
 
 	bool flagComplete = false;
 
+	public static bool inQuestion;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -241,7 +243,19 @@ public class ST_PuzzleDisplay : MonoBehaviour
 		yield return null;
 	}
 
-	private Vector2 ConvertIndexToGrid(int index)
+    private void FixedUpdate()
+    {
+		if(ST_PuzzleDisplay.inQuestion == false)
+        {
+			Invoke("complete", 10);
+        }
+	}
+	void complete()
+    {
+		StartCoroutine("CheckForComplete");
+	}
+
+    private Vector2 ConvertIndexToGrid(int index)
 	{
 		int WidthIndex = index;
 		int HeightIndex = 0;
