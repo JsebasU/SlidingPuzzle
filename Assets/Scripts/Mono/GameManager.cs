@@ -225,10 +225,10 @@ public class GameManager : MonoBehaviour {
     public void AcceptQuestion()
     {
         Invoke("Accept",1f);
-        /*for(int i=0; i< AnswerContent.transform.childCount; i++)
+        for(int i=0; i< AnswerContent.transform.childCount; i++)
         {
             AnswerContent.transform.GetChild(i).GetComponent<UnityEngine.UI.Button>().interactable = false;
-        }*/
+        }
 
     }
 
@@ -294,9 +294,9 @@ public class GameManager : MonoBehaviour {
     {
         yield return new WaitForSeconds(GameUtility.ResolutionDelayTime);
         Display();
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < AnswerContent.transform.childCount; i++)
         {
-            AnswerContent.transform.GetChild(i).GetComponent<UnityEngine.UI.Button>().interactable = false;
+            AnswerContent.transform.GetChild(i).GetComponent<UnityEngine.UI.Button>().interactable = true;
         }
     }
 

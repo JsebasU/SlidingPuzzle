@@ -297,14 +297,14 @@ public class UIManager : MonoBehaviour {
 
     public void Continuar()
     {
-        IE_DisplayTimedResolution = DisplayTimedResolution();
-        StartCoroutine(IE_DisplayTimedResolution);
-        bContinuar.interactable = false;
-        canvasAlterno.SetActive(false);
         for (int i = 0; i < AnswerContent.transform.childCount; i++)
         {
             AnswerContent.transform.GetChild(i).GetComponent<UnityEngine.UI.Button>().interactable = true;
         }
+        IE_DisplayTimedResolution = DisplayTimedResolution();
+        StartCoroutine(IE_DisplayTimedResolution);
+        bContinuar.interactable = false;
+        canvasAlterno.SetActive(false);      
         gameManager.Continuar();
     }
 
