@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe1e3773ddaa9ce48835846fb8e11c7f, type: 3}
+  m_Name: pregunta9
+  m_EditorClassIdentifier: 
+  _info: "\xBFEste sonido es caracter\xEDstico de cu\xE1l deporte?:"
+  _audio: {fileID: 8300000, guid: 17051cdb0f815cf439c65f1a6c3f9c79, type: 3}
+  _video: {fileID: 0}
+  _image: {fileID: 0}
+  _answers:
+  - _info: Basquetbol
+    _isCorrect: 0
+  - _info: Bolos
+    _isCorrect: 1
+  - _info: Boxeo
+    _isCorrect: 0
+  - _info: "Nataci\xF3n"
+    _isCorrect: 0
+  _useTimer: 1
+  _timer: 120
+  _answerType: 1
+  _answerStyle: 2
+  _addScore: 1
+  source: {fileID: 0}
+  rCorrecta: 0
