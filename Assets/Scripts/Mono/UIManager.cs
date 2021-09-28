@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 [Serializable]
 public struct UIManagerParameters
@@ -147,6 +148,14 @@ public class UIManager : MonoBehaviour {
 
     [SerializeField] TextMeshProUGUI questionInfoTextObject;
     public TextMeshProUGUI QuestionInfoTextObject { get { return questionInfoTextObject; } }
+
+    public GameObject vistaGanador;
+
+    public GameObject vistaPerdedor;
+
+    public GameObject vistaJugador;
+
+    public TextMeshProUGUI mensaje;
 
     #endregion
 
@@ -374,17 +383,17 @@ public class UIManager : MonoBehaviour {
                 break;
             case ResolutionScreenType.Finish:
                 //uIElements.ResolutionBG.color = parameters.FinalBGColor;
-                uIElements.ResolutionStateInfoText.text = "PUNTUACIÓN";
+                /*uIElements.ResolutionStateInfoText.text = "PUNTUACIÓN";*/
                 if (gameManager.publichelpfinishDoble)
                 {
                     gameManager.publichelpfinish = true;
                 }
-                uIElements.BotonContinuar.SetActive(false);
-
+                /*uIElements.BotonContinuar.SetActive(false);*/
+                vistaJugador.SetActive(false);
                 StartCoroutine(CalculateScore());
-                uIElements.FinishUIElements.gameObject.SetActive(true);
-                uIElements.HighScoreText.gameObject.SetActive(true);
-                uIElements.HighScoreText.text = ((highscore > events.StartupHighscore) ? "<color=yellow>new </color>" : string.Empty) + "Highscore: " + highscore;
+                /*uIElements.FinishUIElements.gameObject.SetActive(true);
+                uIElements.HighScoreText.gameObject.SetActive(true);*/
+               /*uIElements.HighScoreText.text = ((highscore > events.StartupHighscore) ? "<color=yellow>new </color>" : string.Empty) + "Highscore: " + highscore;*/
                 break;
         }
     }
@@ -395,13 +404,22 @@ public class UIManager : MonoBehaviour {
     IEnumerator CalculateScore()
     {
         var scoreValue = 0;
-        while (scoreValue < events.CurrentFinalScore)
+        if(events.CurrentFinalScore < 20)
+        {
+            vistaPerdedor.SetActive(true);
+            mensaje.text = events.CurrentFinalScore.ToString() + "/20";
+        }
+        if(events.CurrentFinalScore == 20)
+        {
+            vistaGanador.SetActive(true);
+        }
+        /*while (scoreValue < events.CurrentFinalScore)
         {
             scoreValue++;
             uIElements.ResolutionScoreText.text = scoreValue.ToString();
 
-            yield return null;
-        }
+        }*/
+        yield return null;
     }
 
     /// <summary>
@@ -443,5 +461,15 @@ public class UIManager : MonoBehaviour {
     void UpdateScoreUI()
     {
         uIElements.ScoreText.text = events.CurrentFinalScore.ToString();
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
+    public void reset()
+    {
+        SceneManager.LoadScene(0);
     }
 }

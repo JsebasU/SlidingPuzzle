@@ -19,6 +19,8 @@ public class ST_PuzzleTile : MonoBehaviour
 	public static bool flag = false;
 	float timer;
 	public int cantidadPregunta;
+
+	
 	// store this tiles array location.
 	public Vector2 ArrayLocation = new Vector2();
 	public Vector2 GridLocation = new Vector2();
@@ -75,10 +77,14 @@ public class ST_PuzzleTile : MonoBehaviour
 
 	void OnMouseDown()
 	{
+        if (ST_PuzzleDisplay.suffle)
+        {
+			LaunchPositionCoroutine(this.transform.parent.GetComponent<ST_PuzzleDisplay>().GetTargetLocation(this.GetComponent<ST_PuzzleTile>()));
+			move = true;
+			timer = 0;
+		}
 		// get the puzzle display and return the new target location from this tile. 
-		LaunchPositionCoroutine(this.transform.parent.GetComponent<ST_PuzzleDisplay>().GetTargetLocation(this.GetComponent<ST_PuzzleTile>()));
-		move = true;
-		timer = 0;
+		
 	}
 
 	private void Update()

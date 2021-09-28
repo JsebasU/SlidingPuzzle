@@ -43,9 +43,12 @@ public class ST_PuzzleDisplay : MonoBehaviour
 
 	public static bool flagIsComplete = false;
 
+	public static bool suffle = false;
+
 	// Use this for initialization
 	void Start () 
 	{
+		suffle = false;
 		inQuestion = false;
 		// create the games puzzle tiles from the provided image.
 		CreatePuzzleTiles();
@@ -219,7 +222,8 @@ public class ST_PuzzleDisplay : MonoBehaviour
 
 		// continually check for the correct answer.
 		StartCoroutine(CheckForComplete());
-		yield return null;
+		suffle = true;
+	yield return null;
 	}
 
 	public IEnumerator CheckForComplete()
