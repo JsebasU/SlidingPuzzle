@@ -78,12 +78,12 @@ public class GameManager : MonoBehaviour {
     /// </summary>
     void Start()
     {
-        events.StartupHighscore = PlayerPrefs.GetInt(GameUtility.SavePrefKey);
+        /*events.StartupHighscore = PlayerPrefs.GetInt(GameUtility.SavePrefKey);*/
 
-        timerDefaultColor = timerText.color;
+        /*timerDefaultColor = timerText.color;*/
         LoadQuestions();
 
-        timerStateParaHash = Animator.StringToHash("TimerState");
+        /*timerStateParaHash = Animator.StringToHash("TimerState");*/
 
         var seed = UnityEngine.Random.Range(int.MinValue, int.MaxValue);
         UnityEngine.Random.InitState(seed);
@@ -158,10 +158,10 @@ public class GameManager : MonoBehaviour {
             events.UpdateQuestionUI(question);
         } else { Debug.LogWarning("Ups! Something went wrong while trying to display new Question UI Data. GameEvents.UpdateQuestionUI is null. Issue occured in GameManager.Display() method."); }
 
-        if (question.UseTimer)
+        /*if (question.UseTimer)
         {
             UpdateTimer(question.UseTimer);
-        }
+        }*/
     }
 
     /// <summary>

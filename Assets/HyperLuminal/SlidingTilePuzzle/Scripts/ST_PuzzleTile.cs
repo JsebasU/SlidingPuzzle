@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ST_PuzzleTile : MonoBehaviour 
+public class ST_PuzzleTile : MonoBehaviour
 {
 	// the target position for this tile.
 	public Vector3 TargetPosition;
@@ -23,31 +23,40 @@ public class ST_PuzzleTile : MonoBehaviour
 	public Vector2 ArrayLocation = new Vector2();
 	public Vector2 GridLocation = new Vector2();
 
+	public references refe;
+
+
 	GameObject CanvasP;
 	GameObject CanvasA;
 
-	
 
 	void Awake()
 	{
 		// assign the new target position.
 		TargetPosition = this.transform.localPosition;
-		CanvasP = GameObject.FindGameObjectWithTag("EditorOnly");
-		CanvasA = GameObject.FindGameObjectWithTag("Respawn");
+
 		// start the movement coroutine to always move the objects to the new target position.
 		StartCoroutine(UpdatePosition());
 	}
 
-    private void Start()
-    {
-		if (!flag)
+	private void Start()
+	{
+		refe = GameObject.FindWithTag("MainCamera").GetComponent<references>();
+
+		if (CanvasP == null)
+			CanvasP = refe.CanvasP;
+		if (CanvasA == null)
+			CanvasA = refe.CanvasA;
+
+		/*if (!flag)
 		{
-			CanvasP.SetActive(false);
+            if (CanvasP != null)
+                CanvasP.SetActive(false);
 			flag = true;
-		}
+		}*/
 	}
 
-    public  void LaunchPositionCoroutine(Vector3 newPosition)
+	public void LaunchPositionCoroutine(Vector3 newPosition)
 	{
 		// assign the new target position.
 		TargetPosition = newPosition;
@@ -56,12 +65,12 @@ public class ST_PuzzleTile : MonoBehaviour
 		StartCoroutine(UpdatePosition());
 	}
 
-	
+
 	public void ExecuteAdditionalMove()
 	{
 		// get the puzzle display and return the new target location from this tile. 
 		LaunchPositionCoroutine(this.transform.parent.GetComponent<ST_PuzzleDisplay>().GetTargetLocation(this.GetComponent<ST_PuzzleTile>()));
-		
+
 	}
 
 	void OnMouseDown()
@@ -72,12 +81,13 @@ public class ST_PuzzleTile : MonoBehaviour
 		timer = 0;
 	}
 
-    private void Update()
-    {
+	private void Update()
+	{
+
 		if (ArrayLocation == GridLocation) { CorrectLocation = true; } else { CorrectLocation = false; }
 
 		if (move)
-        {
+		{
 			timer += Time.deltaTime;
 
 		}
@@ -90,7 +100,7 @@ public class ST_PuzzleTile : MonoBehaviour
 
 		if (CorrectLocation && move && timer > 1f)
 		{
-			
+
 			if (!CorrectLocationAnswer)
 			{
 				cantidadPregunta = cantidadPregunta + 1;
@@ -98,9 +108,9 @@ public class ST_PuzzleTile : MonoBehaviour
 				{
 					UIManager.firstCheckCorrect = true;
 					CanvasA.SetActive(false);
-					CanvasP.SetActive(true);
+					//CanvasP.SetActive(true);
 					CorrectLocationAnswer = true;
-					UIManager.isplaying = true;				
+					UIManager.isplaying = true;
 					Debug.Log(cantidadPregunta + " Preguntas lanzadas");
 					ST_PuzzleDisplay.inQuestion = true;
 					ST_PuzzleDisplay.flagIsComplete = false;
@@ -108,14 +118,14 @@ public class ST_PuzzleTile : MonoBehaviour
 				else if (UIManager.isplaying && !CorrectLocationAnswer)
 				{
 					CorrectLocationAnswer = true;
-					GameObject.FindGameObjectWithTag("Finish").GetComponent<UIManager>().Continuar();		
+					GameObject.FindGameObjectWithTag("Finish").GetComponent<UIManager>().Continuar();
 					Debug.Log(cantidadPregunta + " Preguntas lanzadas");
 					ST_PuzzleDisplay.inQuestion = true;
 					ST_PuzzleDisplay.flagIsComplete = false;
 				}
 			}
 		}
-	
+
 	}
 	public IEnumerator UpdatePosition()
 	{
@@ -129,7 +139,7 @@ public class ST_PuzzleTile : MonoBehaviour
 		}
 
 		// after each move check if we are now in the correct location.
-		
+
 
 		// if we are not an active tile then hide our renderer and collider.
 		if (Active == false)

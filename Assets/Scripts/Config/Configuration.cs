@@ -47,7 +47,7 @@ public class Configuration : MonoBehaviour
         PlayerPrefs.SetInt("tiempoPreguntas", tPreguntas);
         PlayerPrefs.SetInt("canridadPreguntas", cPreguntas);
 
-        SceneManager.LoadSceneAsync(1);
+        SceneManager.LoadScene(1);
     }
 
     public void ChangeTiempoAyudaPublico(int i)

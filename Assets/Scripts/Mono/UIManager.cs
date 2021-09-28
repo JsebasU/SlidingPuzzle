@@ -142,6 +142,10 @@ public class UIManager : MonoBehaviour {
 
     float timer = 0;
 
+    public static bool flagBegin = false;
+
+    float timer2 = 0;
+
     #endregion
 
     #region Default Unity methods
@@ -170,8 +174,9 @@ public class UIManager : MonoBehaviour {
     /// </summary>
     void Start()
     {
-        UpdateScoreUI();
-        resStateParaHash = Animator.StringToHash("ScreenState");
+        /*UpdateScoreUI();
+        resStateParaHash = Animator.StringToHash("ScreenState");*/
+        flagBegin = false;
     }
 
     #endregion
@@ -182,17 +187,17 @@ public class UIManager : MonoBehaviour {
     void UpdateQuestionUI(Question question)
     {
         gameManager.pause = false;
-        bContinuar.interactable = true;
+        /*bContinuar.interactable = true;*/
         timer = 0;
-        uIElements.QuestionInfoAudioObject.clip = null;
+        /*uIElements.QuestionInfoAudioObject.clip = null;
         Istime = false;
         uIElements.QuestionInfoVideoObject.clip = null;
         uIElements.ConfingAudio.gameObject.SetActive(false);
         uIElements.ConfingVideo.gameObject.SetActive(false);
-        uIElements.ConfingImage.gameObject.SetActive(false);
+        uIElements.ConfingImage.gameObject.SetActive(false);*/
         uIElements.QuestionInfoTextObject.gameObject.SetActive(true);
         uIElements.QuestionInfoTextObject.text = question.Info;
-        bvideo.gameObject.SetActive(false);
+        /*bvideo.gameObject.SetActive(false);
         baudio.gameObject.SetActive(false);
         baudioP.gameObject.SetActive(true);
         bvideoP.gameObject.SetActive(true);
@@ -229,13 +234,20 @@ public class UIManager : MonoBehaviour {
                 uIElements.QuestionInfoTextObjectImage.text = question.Info;
                 uIElements.QuestionInfoImageObject.sprite = question.image;
                 break;
-        }
+        }*/
         
         CreateAnswers(question);
     }
 
+
     private void Update()
     {
+        /*timer2 = timer2 + Time.deltaTime;
+        if(timer2 > 3 && !flagBegin)
+        {
+            canvasAlterno.gameObject.SetActive(true);
+            flagBegin = true;
+        }*/
         if (!firstCheckCorrect)
         {
             Istime = false;
