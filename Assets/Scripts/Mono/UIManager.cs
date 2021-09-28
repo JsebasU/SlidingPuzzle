@@ -199,7 +199,6 @@ public class UIManager : MonoBehaviour {
     {
         /*gameManager.pause = false;*/
         /*bContinuar.interactable = true;*/
-        print("1");
         timer = 0;
         /*uIElements.QuestionInfoAudioObject.clip = null;
         Istime = false;
@@ -207,13 +206,9 @@ public class UIManager : MonoBehaviour {
         uIElements.ConfingAudio.gameObject.SetActive(false);
         uIElements.ConfingVideo.gameObject.SetActive(false);
         uIElements.ConfingImage.gameObject.SetActive(false);*/
-        print("2");
+       
         /*uIElements.QuestionInfoTextObject.gameObject.SetActive(true);*/
-        print("3");
-        print("Question" + question.Info);
-        print(uIElements +"F");
-        print(QuestionInfoTextObject + "Text");
-        print(AnswersContentArea.transform.childCount + "Text2");
+      
 
        QuestionInfoTextObject.text = question.Info;
         /*bvideo.gameObject.SetActive(false);
@@ -254,9 +249,9 @@ public class UIManager : MonoBehaviour {
                 uIElements.QuestionInfoImageObject.sprite = question.image;
                 break;
         }*/
-        print("5");
+
         CreateAnswers(question);
-        print("6");
+        
     }
 
 
