@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-[Serializable()]
+[Serializable]
 public struct UIManagerParameters
 {
     [Header("Answers Options")]
@@ -20,14 +20,10 @@ public struct UIManagerParameters
     [SerializeField] Color finalBGColor;
     public Color FinalBGColor { get { return finalBGColor; } }
 }
-[Serializable()]
+[Serializable]
 public struct UIElements
 {
-    [SerializeField] RectTransform answersContentArea;
-    public RectTransform AnswersContentArea { get { return answersContentArea; } }
-
-    [SerializeField] TextMeshProUGUI questionInfoTextObject;
-    public TextMeshProUGUI QuestionInfoTextObject { get { return questionInfoTextObject; } }
+    
 
     [SerializeField] AudioSource questionInfoAudioObject;
     public AudioSource QuestionInfoAudioObject { get { return questionInfoAudioObject; } }
@@ -146,6 +142,12 @@ public class UIManager : MonoBehaviour {
 
     float timer2 = 0;
 
+    [SerializeField] RectTransform answersContentArea;
+    public RectTransform AnswersContentArea { get { return answersContentArea; } }
+
+    [SerializeField] TextMeshProUGUI questionInfoTextObject;
+    public TextMeshProUGUI QuestionInfoTextObject { get { return questionInfoTextObject; } }
+
     #endregion
 
     #region Default Unity methods
@@ -186,8 +188,9 @@ public class UIManager : MonoBehaviour {
     /// </summary>
     void UpdateQuestionUI(Question question)
     {
-        gameManager.pause = false;
+        /*gameManager.pause = false;*/
         /*bContinuar.interactable = true;*/
+        print("1");
         timer = 0;
         /*uIElements.QuestionInfoAudioObject.clip = null;
         Istime = false;
@@ -195,8 +198,15 @@ public class UIManager : MonoBehaviour {
         uIElements.ConfingAudio.gameObject.SetActive(false);
         uIElements.ConfingVideo.gameObject.SetActive(false);
         uIElements.ConfingImage.gameObject.SetActive(false);*/
-        uIElements.QuestionInfoTextObject.gameObject.SetActive(true);
-        uIElements.QuestionInfoTextObject.text = question.Info;
+        print("2");
+        /*uIElements.QuestionInfoTextObject.gameObject.SetActive(true);*/
+        print("3");
+        print("Question" + question.Info);
+        print(uIElements +"F");
+        print(QuestionInfoTextObject + "Text");
+        print(AnswersContentArea.transform.childCount + "Text2");
+
+       QuestionInfoTextObject.text = question.Info;
         /*bvideo.gameObject.SetActive(false);
         baudio.gameObject.SetActive(false);
         baudioP.gameObject.SetActive(true);
@@ -235,8 +245,9 @@ public class UIManager : MonoBehaviour {
                 uIElements.QuestionInfoImageObject.sprite = question.image;
                 break;
         }*/
-        
+        print("5");
         CreateAnswers(question);
+        print("6");
     }
 
 
@@ -252,7 +263,7 @@ public class UIManager : MonoBehaviour {
         {
             Istime = false;
         }
-        if (Istime) {
+        /*if (Istime) {
             if (isNow)
             {
                 timer = timer + Time.deltaTime;
@@ -275,7 +286,7 @@ public class UIManager : MonoBehaviour {
                     }
                 }
             }
-        }
+        }*/
         /*Debug.Log(timer+"T");
         Debug.Log(uIElements.QuestionInfoAudioObject.clip.length+"AAAAA");
         Debug.Log(uIElements.QuestionInfoVideoObject.clip.length+"VVVVV");*/
@@ -403,13 +414,13 @@ public class UIManager : MonoBehaviour {
         float offset = 0 - parameters.Margins;
         for (int i = 0; i < question.Answers.Length; i++)
         {
-            AnswerData newAnswer = (AnswerData)Instantiate(answerPrefab, uIElements.AnswersContentArea);
+            AnswerData newAnswer = (AnswerData)Instantiate(answerPrefab,AnswersContentArea);
             newAnswer.UpdateData(question.Answers[i].Info, i);
 
             newAnswer.Rect.anchoredPosition = new Vector2(0, offset);
 
             offset -= (newAnswer.Rect.sizeDelta.y + parameters.Margins);
-            uIElements.AnswersContentArea.sizeDelta = new Vector2(uIElements.AnswersContentArea.sizeDelta.x, offset * -1);
+            AnswersContentArea.sizeDelta = new Vector2(AnswersContentArea.sizeDelta.x, offset * -1);
 
             currentAnswers.Add(newAnswer);
         }
