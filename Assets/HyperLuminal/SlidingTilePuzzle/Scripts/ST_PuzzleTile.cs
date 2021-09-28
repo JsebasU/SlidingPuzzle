@@ -103,6 +103,7 @@ public class ST_PuzzleTile : MonoBehaviour
 					UIManager.isplaying = true;				
 					Debug.Log(cantidadPregunta + " Preguntas lanzadas");
 					ST_PuzzleDisplay.inQuestion = true;
+					ST_PuzzleDisplay.flagIsComplete = false;
 				}
 				else if (UIManager.isplaying && !CorrectLocationAnswer)
 				{
@@ -110,6 +111,7 @@ public class ST_PuzzleTile : MonoBehaviour
 					GameObject.FindGameObjectWithTag("Finish").GetComponent<UIManager>().Continuar();		
 					Debug.Log(cantidadPregunta + " Preguntas lanzadas");
 					ST_PuzzleDisplay.inQuestion = true;
+					ST_PuzzleDisplay.flagIsComplete = false;
 				}
 			}
 		}

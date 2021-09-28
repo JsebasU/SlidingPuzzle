@@ -41,6 +41,8 @@ public class ST_PuzzleDisplay : MonoBehaviour
 
 	public static bool inQuestion;
 
+	public static bool flagIsComplete = false;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -64,6 +66,11 @@ public class ST_PuzzleDisplay : MonoBehaviour
 		// set the scale of the entire puzzle object as set in the inspector.
 		this.transform.localScale = PuzzleScale;
 
+        if (!flagIsComplete)
+        {
+			Invoke("CheckInQuestion", 1);
+			flagIsComplete = true;
+		}
 	}
 
 	public Vector3 GetTargetLocation(ST_PuzzleTile thisTile)
@@ -251,7 +258,7 @@ public class ST_PuzzleDisplay : MonoBehaviour
 	{
 		if (ST_PuzzleDisplay.inQuestion == false)
 		{
-			Invoke("complete", 10);
+			Invoke("complete", 20);
 		}
 		else
 		{
