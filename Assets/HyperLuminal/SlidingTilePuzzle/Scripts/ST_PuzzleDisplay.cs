@@ -44,11 +44,14 @@ public class ST_PuzzleDisplay : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
+		inQuestion = false;
 		// create the games puzzle tiles from the provided image.
 		CreatePuzzleTiles();
 
 		// mix up the puzzle.
 		StartCoroutine(JugglePuzzle());
+
+		Invoke("CheckInQuestion", 1);
 
 	}
 	
@@ -60,6 +63,7 @@ public class ST_PuzzleDisplay : MonoBehaviour
 
 		// set the scale of the entire puzzle object as set in the inspector.
 		this.transform.localScale = PuzzleScale;
+
 	}
 
 	public Vector3 GetTargetLocation(ST_PuzzleTile thisTile)
@@ -243,13 +247,19 @@ public class ST_PuzzleDisplay : MonoBehaviour
 		yield return null;
 	}
 
-    private void FixedUpdate()
-    {
-		if(ST_PuzzleDisplay.inQuestion == false)
-        {
+	private void CheckInQuestion()
+	{
+		if (ST_PuzzleDisplay.inQuestion == false)
+		{
 			Invoke("complete", 10);
-        }
+		}
+		else
+		{
+			Invoke("CheckInQuestion", 1);
+		}
 	}
+
+
 	void complete()
     {
 		StartCoroutine("CheckForComplete");
