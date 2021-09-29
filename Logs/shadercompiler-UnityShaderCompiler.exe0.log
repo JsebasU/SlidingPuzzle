@@ -692,3 +692,5 @@ Cmd: preprocess
 
 Cmd: initializeCompiler
 
+Cmd: initializeCompiler
+
